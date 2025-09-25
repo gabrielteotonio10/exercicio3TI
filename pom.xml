@@ -4,78 +4,82 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- Versão do modelo do POM -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Identificação do projeto -->
     <groupId>ti2.cc</groupId>
     <artifactId>exercicio3</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>exercicio3</name>
 
-    <!-- Propriedades do projeto -->
+    <!-- Projeto web -->
+    <packaging>war</packaging>
+
     <properties>
-        <!-- Codificação padrão -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Versão do Java para compilação -->
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
     </properties>
 
-    <!-- Dependências do projeto -->
     <dependencies>
-
-        <!-- JUnit: Biblioteca para testes unitários -->
+        <!-- JUnit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-            <scope>test</scope> <!-- Só usada em testes -->
+            <scope>test</scope>
         </dependency>
 
-        <!-- PostgreSQL JDBC: Conector para banco de dados PostgreSQL -->
+        <!-- PostgreSQL JDBC -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.3.3</version>
         </dependency>
 
-        <!-- Servlet API: Classes para criação de Servlets -->
+        <!-- Servlet API compatível com Tomcat 7 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope> <!-- Servidor fornece essa biblioteca -->
+            <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
 
-        <!-- Gson: Biblioteca para converter objetos Java em JSON e vice-versa -->
+        <!-- Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
         </dependency>
 
-        <!-- SparkJava: Framework minimalista para criação de APIs REST e web apps -->
+        <!-- SparkJava -->
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
             <version>2.9.3</version>
         </dependency>
-
     </dependencies>
 
-    <!-- Configuração de plugins de build -->
     <build>
         <plugins>
-            <!-- Plugin do compilador -->
+            <!-- Compilador -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <!-- Define a versão do Java para compilação -->
                     <source>25</source>
                     <target>25</target>
+                </configuration>
+            </plugin>
+
+            <!-- Tomcat 7 para rodar direto com Maven -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <port>8080</port>
                 </configuration>
             </plugin>
         </plugins>

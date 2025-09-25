@@ -1,0 +1,5 @@
+app\InserirEventoServlet.class
+dao\InformacoesDAO.class
+model\Informacoes.class
+dao\DAO.class
+ti2\cc\Main.class
