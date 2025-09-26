@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.InformacoesDAO;
 import model.Informacoes;
+import service.EventoService;
 
 @WebServlet("/inserirEvento")
 public class InserirEventoServlet extends HttpServlet {
@@ -16,7 +16,7 @@ public class InserirEventoServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // Pega os valores do formulário
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
@@ -26,8 +26,25 @@ public class InserirEventoServlet extends HttpServlet {
         // Cria objeto Informacoes
         Informacoes info = new Informacoes(nome, descricao, data, hora);
 
-        // Insere no banco
-        InformacoesDAO dao = new InformacoesDAO();
-        boolean inserido = dao.insert(info);
+        // Chama o Service
+        EventoService service = new EventoService();
+
+        try {
+            boolean inserido = service.inserirEvento(info);
+            response.setContentType("text/html; charset=UTF-8");
+
+            if (inserido) {
+                response.getWriter().println("<p>✅ Evento inserido com sucesso!</p>");
+            } else {
+                response.getWriter().println("<p>❌ Erro ao inserir evento.</p>");
+            }
+        } catch (IllegalArgumentException e) {
+            // Caso a validação falhe
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().println("<p>⚠️ Erro: " + e.getMessage() + "</p>");
+        } catch (Exception e) {
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().println("<p>❌ Ocorreu um erro inesperado: " + e.getMessage() + "</p>");
+        }
     }
 }
