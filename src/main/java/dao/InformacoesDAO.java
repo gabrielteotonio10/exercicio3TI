@@ -18,7 +18,6 @@ public class InformacoesDAO extends DAO {
 	}
 	
 	
-	// Inserir evento
 	public boolean insert(Informacoes info) {
 		boolean status = false;
 		try {
@@ -37,7 +36,6 @@ public class InformacoesDAO extends DAO {
 	}
 	
 	
-	// Listar todos os eventos
 	public List<Informacoes> getAll() {
 		List<Informacoes> infos = new ArrayList<>();
 		try {
@@ -62,7 +60,6 @@ public class InformacoesDAO extends DAO {
 	}
 	
 	
-	// Listar eventos de uma determinada data
 	public List<Informacoes> getByData(String data) {
 		List<Informacoes> infos = new ArrayList<>();
 		try {
@@ -87,7 +84,6 @@ public class InformacoesDAO extends DAO {
 	}
 	
 	
-	// Deletar evento por data + nome
 	public boolean delete(String data, String nome) {
 		boolean status = false;
 		try {

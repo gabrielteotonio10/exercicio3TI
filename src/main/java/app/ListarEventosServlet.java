@@ -20,15 +20,12 @@ public class ListarEventosServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // 1. Acessa a camada DAO
         InformacoesDAO dao = new InformacoesDAO();
         List<Informacoes> eventos = dao.getAll();
 
-        // 2. Converte a lista de objetos Java para JSON
         Gson gson = new Gson();
         String json = gson.toJson(eventos);
 
-        // 3. Configura a resposta
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);

@@ -16,20 +16,15 @@ public class ExcluirEventoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Pega os valores do HTML (data e nome)
         String dataExclusao = request.getParameter("data");
         String nomeExclusao = request.getParameter("nome");
 
-        // 1. Acessa a camada DAO
         InformacoesDAO dao = new InformacoesDAO();
         boolean deletado = dao.delete(dataExclusao, nomeExclusao);
 
-        // 2. Configura a resposta
         if (deletado) {
-            // Se a exclusão foi bem-sucedida, redireciona o usuário para a página inicial
             response.sendRedirect("index.html?status=sucesso&acao=deletar");
         } else {
-            // Se falhou (evento não encontrado ou erro), redireciona com status de erro
             response.sendRedirect("index.html?status=erro&acao=deletar");
         }
     }

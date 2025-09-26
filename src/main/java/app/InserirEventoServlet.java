@@ -17,16 +17,13 @@ public class InserirEventoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Pega os valores do formulário
         String nome = request.getParameter("nome");
         String descricao = request.getParameter("descricao");
         String data = request.getParameter("data");
         String hora = request.getParameter("hora");
 
-        // Cria objeto Informacoes
         Informacoes info = new Informacoes(nome, descricao, data, hora);
 
-        // Chama o Service
         EventoService service = new EventoService();
 
         try {
@@ -39,7 +36,6 @@ public class InserirEventoServlet extends HttpServlet {
                 response.getWriter().println("<p>❌ Erro ao inserir evento.</p>");
             }
         } catch (IllegalArgumentException e) {
-            // Caso a validação falhe
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().println("<p>⚠️ Erro: " + e.getMessage() + "</p>");
         } catch (Exception e) {

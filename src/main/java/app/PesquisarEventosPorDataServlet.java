@@ -20,18 +20,14 @@ public class PesquisarEventosPorDataServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Pega o valor do campo 'searchDate' do HTML
         String dataBusca = request.getParameter("data");
 
-        // 1. Acessa a camada DAO
         InformacoesDAO dao = new InformacoesDAO();
         List<Informacoes> eventos = dao.getByData(dataBusca);
 
-        // 2. Converte a lista de objetos Java para JSON
         Gson gson = new Gson();
         String json = gson.toJson(eventos);
 
-        // 3. Configura a resposta
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
